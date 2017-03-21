@@ -1,0 +1,75 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.eventlist {
+  list-style-type: none;
+}
+/*App Component Styling*/
+.navbar{
+  margin: 0;
+  padding: 0;
+  background-color: black;
+}
+.btn-secondary{
+  background-color: black;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-left: 5px;
+}
+
+.btn-secondary a{
+  color: white;
+  text-decoration: none;
+}
+
+/*Login Component Styling*/
+
+.background_login{ 
+
+  background: url('shoes.jpg');
+  width: 100%;
+  height: 1000px;
+  margin: 0;
+  padding: 0;
+  padding-top: 100px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+}
+
+.background_createEvent{ 
+
+  background: url('runners.jpg');
+  width: 100%;
+  height: 1000px;
+  margin: 0;
+  padding: 0;
+  padding-top: 100px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+}
+
+.background_confirmation{
+  background: url('man_running.jpg');
+  width: 100%;
+  height: 1000px;
+  margin: 0;
+  padding: 0;
+  padding-top: 100px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50%;
+}
+.square{
+      background-color: rgba(255,255,255,.8);
+      padding: 25px 60px;
+
+  
+}
