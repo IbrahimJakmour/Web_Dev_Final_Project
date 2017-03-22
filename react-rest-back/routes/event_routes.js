@@ -16,6 +16,7 @@ router.get('/', (req, res) => {
 
 // get all events by date specified
 router.post('/date', (req, res) => {
+    console.log(req.query)
     
     function zeroTime(d) {
         d.setHours(0);

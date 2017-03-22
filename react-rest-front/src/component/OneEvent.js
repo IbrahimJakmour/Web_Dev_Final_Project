@@ -25,6 +25,7 @@ class OneEvent extends React.Component {
                         <a href={this.props.route} className="card-link">Route link</a>
                     </div>                   
                 </div>
+    
                 )
     }
 }

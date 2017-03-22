@@ -9,7 +9,10 @@ import {TextField} from 'material-ui';
 class Register extends React.Component {
   constructor(){
     super();
-    this.state = {username:null,password:null};
+    this.state = {
+      username:null,
+      password:null
+    };
     this.formSubmit = this.formSubmit.bind(this);
     this.txtFieldChange = this.txtFieldChange.bind(this);
   }
