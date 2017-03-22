@@ -9,6 +9,7 @@ import CreateEvent from './component/CreateEvent';
 import OneEvent from './component/OneEvent';
 import PrivatePage from'./component/PrivatePage';
 import Confirmation from './component/Confirmation';
+import EventDetails from './component/EventDetails';
 import './style.css';
 
 
@@ -22,6 +23,7 @@ ReactDOM.render((
          <Route path="/private" component={PrivatePage} />
          <Route path="/oneEvent" component={OneEvent}/>
          <Route path="/confirmation" component={Confirmation}/>
+         <Route path="/details/:event_id" component={EventDetails}/>
       </Route>
   </Router>
 ),

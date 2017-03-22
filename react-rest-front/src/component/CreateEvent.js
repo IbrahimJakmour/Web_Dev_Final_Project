@@ -30,6 +30,7 @@ class CreateEvent extends React.Component {
     this.setState({
       controlledDate: date
     });
+    console.log(date)
   };
 
   handleChangeTimePicker24 = (event, date) => {
@@ -111,7 +112,6 @@ class CreateEvent extends React.Component {
     }
     this.setState({
       name: this.state.name,
-      controlledDate: this.state.cont,
       location_start: this.state.location_start,
       minPace: this.state.minPace,
       maxPace: this.state.maxPace,

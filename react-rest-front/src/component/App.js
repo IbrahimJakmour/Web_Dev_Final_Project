@@ -1,9 +1,5 @@
 import React from 'react';
 import {Link} from 'react-router';
-import Login from './Login';
-import Calendar from './Calendar';
-import CreateEvent from './CreateEvent';
-import Register from './Register';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 var injectTapEventPlugin = require("react-tap-event-plugin");

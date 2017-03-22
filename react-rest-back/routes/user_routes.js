@@ -46,7 +46,7 @@ router.post('/', (req, res) => {
 
 //get one specific user
 
-router.get('/:user_id', (req,res) => {
+router.get('/:user_id', authorize, (req,res) => {
     User.findById(req.params.user_id)
         .then(element => res.json(element))
         .catch(err => res.status(500).json(err))

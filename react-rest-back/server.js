@@ -45,7 +45,9 @@ app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
 app.use('/login', loginRoutes);
 
-
+// app.get('*', (req,res) =>{
+//     console.log('catch all route')
+// })
 
 app.listen(PORT, () => {
 	console.log('Server Started on http://localhost:8080');

@@ -31,6 +31,7 @@ EventSchema.pre('save', function(next) {
 })
 
 EventSchema.pre('save', function(next){
+    var self = this;
     const date = self.date_time
     const hour = date.getHours();
     if((hour >=5) && (hour <12)){
@@ -39,13 +40,14 @@ EventSchema.pre('save', function(next){
         self.day_period = 'Afternoon'
     } else if((hour >= 17) && (hour <21)){
         self.day_period = 'Evening'
-    } else if(jour >= 21) {
+    } else if(hour >= 21) {
         self.day_period = 'Night'
     }
     next();
 })
 
 EventSchema.pre('save', function(next){
+    var self = this;
     const date = self.date_time
     const day = date.getDay();
     if((day === 0) || (day === 6)){
