@@ -103,7 +103,6 @@ router.post('/:event_id/attendees', (req, res) => {
     Event.findById(req.params.event_id).then(event => {
         if (event.attendees.indexOf(req.body.id) == -1) {
             event.attendees.push(req.body.id);
-            console.log(event.attendees.push(req.body.id))
             event.save()
                 .then(savedAttribute => {
                     res.json(savedAttribute);

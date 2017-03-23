@@ -7,15 +7,18 @@ class EventDetails extends React.Component {
         super();
         this.handleConfirm = this.handleConfirm.bind(this);
         this.state = ({
-            events: {attendees: []}
+            events: { attendees: [] }
         })
     }
 
     handleConfirm(e) {
         event.preventDefault();
-        console.log('hello!!')
-        axios.post('http://localhost:8080/events/calendar')
+        const eventId = this.state.events._id
+        const userId = JSON.parse(localStorage.user)._id
+        console.log()
+        axios.post('http://localhost:8080/events/' + eventId + '/attendees', { id: userId }, { headers: { 'authorization': localStorage.authToken } })
             .then(response => {
+                location.href=('/calendar')
                 console.log('this is the response');
             })
             .catch(err => {
@@ -27,8 +30,8 @@ class EventDetails extends React.Component {
         const event_id = this.props.params.event_id
         axios.get('http://localhost:8080/events/' + event_id, { headers: { 'authorization': localStorage.authToken } })
             .then(response => {
-                  console.log('here', response.data)
-                this.setState({           
+                console.log('here', response.data)
+                this.setState({
                     events: response.data
                 }
                 )
@@ -39,11 +42,11 @@ class EventDetails extends React.Component {
     }
 
     render() {
- 
+
         const attendeesArray = this.state.events.attendees.map((element, i) => {
-             return <li> {element.username} </li>
-         })
-         console.log(attendeesArray)
+            return <li> {element.username} </li>
+        })
+        console.log(attendeesArray)
 
         return (
             <div className="container-fluid background_login">
@@ -62,13 +65,13 @@ class EventDetails extends React.Component {
                             <li className="list-group-item">Pace: {this.state.events.minPace} min/km to {this.state.events.maxPace} min/km </li>
                         </ul>
                         <ul>
-                        {attendeesArray}
+                            {attendeesArray}
                         </ul>
                         <label>
                             <input type="checkbox" checked={this.state.events.bag ? true : false} /> Bag Drop Available
                  </label>
                         <div className="card-block">
-                            <button className="btn btn-secondary" type="submit" onChange={this.handleConfirm}>{/*<Link to="/confirmation">Attend</Link>*/}Attend</button>
+                            <button className="btn btn-secondary" onClick={this.handleConfirm}>{/*<Link to="/confirmation">Attend</Link>*/}Attend</button>
                         </div>
                     </div>
                     <div className="col-md-4"></div>

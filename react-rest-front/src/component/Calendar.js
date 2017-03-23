@@ -114,7 +114,6 @@ class Calendar extends React.Component {
 
     render() {
         const responseArray = this.state.events
-        console.log(responseArray)
         const eventsArray = responseArray.map((event, i) => {
             return <OneEvent key={i} name={event.name} distance={event.distance} date_time={event.date_time} comment={event.comment} minPace={event.minPace} maxPace={event.maxPace} location_start={event.location_start} day_period={event.day_period} just_date={event.just_date} bag={event.bag} event_id={event._id} />
         })
