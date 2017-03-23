@@ -7,7 +7,7 @@ const EventSchema = new Schema({
     name: {type:String, required: true},
     date_time: {type: Date},
     just_date: {type: Date},
-    day_period: {type: String},
+    day_period: {type: Number},
     week_period:{type: String},
     location_start: {type: String, required: true}, 
     minPace: Number, 
@@ -36,13 +36,13 @@ EventSchema.pre('save', function(next){
     const date = self.date_time
     const hour = date.getHours();
     if((hour >=5) && (hour <12)){
-        self.day_period = 'Morning'
+        self.day_period = 1
     } else if((hour >=12) && (hour <17)){
-        self.day_period = 'Afternoon'
+        self.day_period = 2
     } else if((hour >= 17) && (hour <21)){
-        self.day_period = 'Evening'
+        self.day_period = 3
     } else if(hour >= 21) {
-        self.day_period = 'Night'
+        self.day_period = 4
     }
     next();
 })

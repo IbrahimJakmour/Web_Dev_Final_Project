@@ -21,7 +21,7 @@ class OneEvent extends React.Component {
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">Date: {concatDate}</li>
                         <li className="list-group-item">Time: {concatTime}</li>
-                        <li className="list-group-item">Distance:{this.props.distance}</li>
+                        <li className="list-group-item">Distance: {this.props.distance}</li>
                         <li className="list-group-item">Pace: {this.props.minPace} min/km to {this.props.maxPace} min/km</li>
                     </ul>
                     <label className="checkboxLabel">

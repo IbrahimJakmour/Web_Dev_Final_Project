@@ -29,14 +29,11 @@ router.get('/date', (req, res) => {
     }
     minDate = zeroTime(new Date(req.query.minDate));
     maxDate = zeroTime(new Date(req.query.maxDate));
-    console.log(minDate.toString())
-    console.log(maxDate.toString());
-
     Event.find({
         date_time: { $gte: minDate, $lte: maxDate, }
     })
-        .then(shop => {
-            res.json(shop);
+        .then(event => {
+            res.json(event);
         })
         .catch(err => {
             console.log(err);
@@ -45,52 +42,66 @@ router.get('/date', (req, res) => {
         })
 })
 
+//get element by id number
 router.get('/:event_id', (req, res) => {
     Event.findById(req.params.event_id)
-        .then(updated => {res.json(updated)
-        console.log(updated)}
-        )
+        .populate('attendees')
+        .then(updated => {
+            res.json(updated)
+        })
         .catch(err => res.status(500).json(err));
-    
+
 });
 
 //get event by time period
-
+router.get('/time', (req, res) => {
+    console.log(req)
+    Event.find({day_period : req.query.day_period})
+        .then(event => {
+            res.json(event)
+            console.log(event)
+        })
+        .catch(err => {
+            res.status(400)
+                .json({ err })
+                console.log('oops')
+        })
+});
 
 
 //CREATE a new event
 router.post('/', (req, res) => {
     let object = req.body
-    console.log('This is req.body:'); 
-        let newEvent = Event({
-            name: object.name,
-            date_time: object.date_time,
-            location_start: object.location_start,
-            minPace: object.minPace,
-            maxPace: object.maxPace,
-            distance: object.distance,
-            bag: object.bag,
-            men: object.men,
-            women: object.women,
-            comment: object.comment,
-            username: object.username,
-            created_by: object.created_by
+    console.log('This is req.body:');
+    let newEvent = Event({
+        name: object.name,
+        date_time: object.date_time,
+        location_start: object.location_start,
+        minPace: object.minPace,
+        maxPace: object.maxPace,
+        distance: object.distance,
+        bag: object.bag,
+        men: object.men,
+        women: object.women,
+        comment: object.comment,
+        username: object.username,
+        created_by: object.created_by
+    })
+    console.log('This is the new Event:');
+    console.log(newEvent)
+    newEvent.save()
+        .then(element => { res.json(newEvent) })
+        .catch(err => {
+            console.log(err)
+            res.status(400).json({ err })
         })
-        console.log('This is the new Event:');
-        console.log(newEvent)
-        newEvent.save()
-            .then(element => {res.json(newEvent) })
-            .catch(err => {
-                console.log(err)
-                res.status(400).json({ err })
-            })
-    });
+});
 
 //add attendees to event
 
 router.post('/:event_id/attendees', (req, res) => {
     Event.findById(req.params.event_id).then(event => {
-        if (event.attendees.indexOf(req.body.id) == -1){
+        if (event.attendees.indexOf(req.body.id) == -1) {
             event.attendees.push(req.body.id);
             console.log(event.attendees.push(req.body.id))
             event.save()
@@ -106,9 +117,9 @@ router.post('/:event_id/attendees', (req, res) => {
             res.status(403).send('user is already attending');
         }
     })
-    .catch(err => {
-        res.status(500).send(err);
-    })
+        .catch(err => {
+            res.status(500).send(err);
+        })
 
 });
 

@@ -7,14 +7,14 @@ class EventDetails extends React.Component {
         super();
         this.handleConfirm = this.handleConfirm.bind(this);
         this.state = ({
-            event: []
+            events: {attendees: []}
         })
     }
 
     handleConfirm(e) {
         event.preventDefault();
         console.log('hello!!')
-        axios.post('http://localhost:8080/events/:event_id/attendees')
+        axios.post('http://localhost:8080/events/calendar')
             .then(response => {
                 console.log('this is the response');
             })
@@ -25,13 +25,13 @@ class EventDetails extends React.Component {
 
     componentWillMount() {
         const event_id = this.props.params.event_id
-        axios.get('http://localhost:8080/events/' + event_id , { headers: { 'authorization': localStorage.authToken } })
+        axios.get('http://localhost:8080/events/' + event_id, { headers: { 'authorization': localStorage.authToken } })
             .then(response => {
-                this.setState({
-                    event: response.data
+                  console.log('here', response.data)
+                this.setState({           
+                    events: response.data
                 }
                 )
-                console.log(response.data);
             })
             .catch(err => {
                 console.log(err)
@@ -39,25 +39,33 @@ class EventDetails extends React.Component {
     }
 
     render() {
+ 
+        const attendeesArray = this.state.events.attendees.map((element, i) => {
+             return <li> {element.username} </li>
+         })
+         console.log(attendeesArray)
+
         return (
             <div className="container-fluid background_login">
                 <div className="row">
                     <div className="col-md-4"></div>
                     <div className="col-md-4 square">
                         <div className="card-block">
-                          <h1>Event Details</h1>
-                            <h4 className="card-title">{this.props.name}</h4>
-                            <p className="card-text">{this.props.comment}</p>
+                            <h1>Event Details</h1>
+                            <h4 className="card-title">{this.state.events.name}</h4>
+                            <p className="card-text">{this.state.events.comment}</p>
                         </div>
                         <ul className="list-group list-group-flush">
-                            <li className="list-group-item">Date: {this.props.date_time}</li>
-                            <li className="list-group-item">Time: {this.props.date_time}</li>
-                            <li className="list-group-item">Distance:{this.state.event.distance}</li>
-                            <li className="list-group-item">Pace: {this.props.minPace} to {this.props.maxPace}</li>
-                            <li></li>
+                            <li className="list-group-item">Date: {this.state.events.date_time}</li>
+                            <li className="list-group-item">Time: {this.state.events.date_time}</li>
+                            <li className="list-group-item">Distance: {this.state.events.distance} km</li>
+                            <li className="list-group-item">Pace: {this.state.events.minPace} min/km to {this.state.events.maxPace} min/km </li>
+                        </ul>
+                        <ul>
+                        {attendeesArray}
                         </ul>
                         <label>
-                            <input type="checkbox" checked={this.props.bag ? true : false} /> Bag Drop Available
+                            <input type="checkbox" checked={this.state.events.bag ? true : false} /> Bag Drop Available
                  </label>
                         <div className="card-block">
                             <button className="btn btn-secondary" type="submit" onChange={this.handleConfirm}>{/*<Link to="/confirmation">Attend</Link>*/}Attend</button>
@@ -66,7 +74,7 @@ class EventDetails extends React.Component {
                     <div className="col-md-4"></div>
                 </div>
             </div>
-                )
+        )
     }
 }
 

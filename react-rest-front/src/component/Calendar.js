@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
 import OneEvent from './OneEvent';
+import EventDetails from './EventDetails'
 import DatePicker from 'material-ui/DatePicker';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
@@ -15,6 +16,7 @@ class Calendar extends React.Component {
         this.handleChangeDateMin = this.handleChangeDateMin.bind(this);
         this.handleSearchDate = this.handleSearchDate.bind(this);
         this.handleSearchTime = this.handleSearchTime.bind(this);
+        this.handleSearchByDayTime = this.handleSearchByDayTime.bind(this);
         this.state = {
             events: [],
             value: 1,
@@ -56,10 +58,9 @@ class Calendar extends React.Component {
             }
         }
         // other option: var url = 'http://localhost:8080/events/date' + '?minDate=' + minDate.toString() + '&' + 'maxDate=' + maxDate.toString()
-
         axios.get('http://localhost:8080/events/date', config)
             .then(response => {
-                console.log('this is the response for the search date post request')
+                console.log('this is the response for the search get date request')
                 this.setState({
                     events: response.data
                 })
@@ -69,11 +70,18 @@ class Calendar extends React.Component {
             })
     };
 
-    handleSearchTime(e) {
+    handleSearchByDayTime(e) {
         event.preventDefault();
-        axios.post('http://localhost:8080/events/time', this.state)
+        const config = {
+            params: {
+                value: this.state.value
+            }
+        }
+        axios.get('http://localhost:8080/events/time', config)
             .then(response => {
-                console.log('this is the response for the search date post request')
+                this.setState({
+                    events: response.data
+                })
             })
             .catch(err => {
                 console.log(err)
@@ -99,19 +107,18 @@ class Calendar extends React.Component {
                 this.setState({
                     events: response.data
                 })
-                console.log("This is the response for the get.");
-                console.log(response);
             })
             .catch(err => {
-                console.log(err)
             })
     }
 
     render() {
         const responseArray = this.state.events
+        console.log(responseArray)
         const eventsArray = responseArray.map((event, i) => {
             return <OneEvent key={i} name={event.name} distance={event.distance} date_time={event.date_time} comment={event.comment} minPace={event.minPace} maxPace={event.maxPace} location_start={event.location_start} day_period={event.day_period} just_date={event.just_date} bag={event.bag} event_id={event._id} />
         })
+        
         return (
             <div className="container">
                 <h1>Hello!</h1>
@@ -148,7 +155,7 @@ class Calendar extends React.Component {
                             </SelectField>
                         </div>
                         <div className="col-md-4">
-                            <button type="button" className="btn btn-secondary" onClick={this.handleSearchTime}>Search</button>
+                            <button type="button" className="btn btn-secondary" onClick={this.handleSearchByDayTime}>Search</button>
                         </div>
                         <div className="col-md-4"></div>
                     </div>
