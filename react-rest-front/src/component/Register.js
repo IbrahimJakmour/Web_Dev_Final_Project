@@ -42,6 +42,8 @@ class Register extends React.Component {
     axios
       .post('http://localhost:8080/users', this.state)
       .then((res) => {
+        localStorage.user = JSON.stringify(res.data);
+        location.href= ('/login');
         console.log(res);
       })
   }
@@ -83,6 +85,7 @@ class Register extends React.Component {
         <div className="row">
           <div className="col-md-4"></div>
           <div className="col-md-4 square">
+        
             <h2>Create Your Account</h2>
             <h3>Join the Community</h3>
             <form onSubmit={this.formSubmit}>
@@ -110,30 +113,6 @@ class Register extends React.Component {
                   type="text"
                   placeholder="Username"
                   name="username" />
-              </div>
-              <div className="form-group">
-                <input
-                  onChange={this.txtFieldChange}
-                  className="form-control"
-                  type="text"
-                  placeholder="Facebook link"
-                  name="fb_link" />
-              </div>
-              <div className="form-group">
-                <input
-                  onChange={this.txtFieldChange}
-                  className="form-control"
-                  type="text"
-                  placeholder="Instagram link"
-                  name="ig_link" />
-              </div>
-              <div className="form-group">
-                <input
-                  onChange={this.txtFieldChange}
-                  className="form-control"
-                  type="text"
-                  placeholder="Strava link"
-                  name="strava_link" />
               </div>
               <div className="form-group">
                 <input
@@ -176,7 +155,7 @@ class Register extends React.Component {
                   name="password" />
               </div>
               <div className="form-group text-center">
-                <button className="btn btn-primary" type="submit"><Link to="/confirmation">Create Account</Link></button>
+                <button className="btn btn-secondary" type="submit">Create Account</button>
               </div>
             </form>
           </div>

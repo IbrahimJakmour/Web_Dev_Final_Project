@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Router, Route, IndexRoute, browserHistory} from 'react-router';
 import App from './component/App';
 import Login from './component/Login';
+import Home from './component/Home';
 import Register from './component/Register';
 import Calendar from './component/Calendar';
 import CreateEvent from './component/CreateEvent';
@@ -16,7 +17,8 @@ import './style.css';
 ReactDOM.render((
   <Router history={browserHistory} >
       <Route path='/' component={App}>
-        <IndexRoute component={Login}/>
+        <IndexRoute component={Home}/>
+        <Route path='login' component={Login}/>
         <Route path='register' component={Register}/>
         <Route path='calendar' component={Calendar}/>
         <Route path='/createEvent' component={CreateEvent}/>

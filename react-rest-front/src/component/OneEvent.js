@@ -6,6 +6,10 @@ import FlatButton from 'material-ui/FlatButton';
 
 class OneEvent extends React.Component {
     render() {
+    
+    const { date_time } = this.props;
+    const concatDate = date_time.toString().substr(0,10);
+    const concatTime = date_time.toString().substr(11,12) 
 
         return (
             <div className="col-sm-3">
@@ -15,17 +19,16 @@ class OneEvent extends React.Component {
                         <p className="card-text">{this.props.comment}</p>
                     </div>
                     <ul className="list-group list-group-flush">
-                        <li className="list-group-item">Date:{this.props.date_time}</li>
-                        <li className="list-group-item">Time: {this.props.date_time}</li>
+                        <li className="list-group-item">Date: {concatDate}</li>
+                        <li className="list-group-item">Time: {concatTime}</li>
                         <li className="list-group-item">Distance:{this.props.distance}</li>
-                        <li className="list-group-item">Pace: {this.props.minPace} to {this.props.maxPace}</li>
+                        <li className="list-group-item">Pace: {this.props.minPace} min/km to {this.props.maxPace} min/km</li>
                     </ul>
-                    <label>
+                    <label className="checkboxLabel">
                         <input type="checkbox" checked={this.props.bag ? true : false} /> Bag Drop Available
                      </label>
-                    <div className="card-block">
-                        <button><Link to={`/details/${this.props.event_id}`}>Event Details</Link></button>
-                        <a href={this.props.route} className="card-link">Route link</a>
+                    <div className="card-block text-center">
+                        <button className="btn btn-secondary"><Link to={`/details/${this.props.event_id}`}>Event Details</Link></button>
                     </div>
                 </div>
             </div>

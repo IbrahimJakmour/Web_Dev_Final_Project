@@ -36,7 +36,10 @@ router.post('/', (req, res) => {
             password: hash
         })
         newUser.save()
-            .then(element => {res.json(newUser)})
+            .then(element => {
+                console.log(element)
+                res.json(newUser)
+            })
             .catch(err => {res.status(400).json({err})
             })
         });

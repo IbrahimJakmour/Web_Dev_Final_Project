@@ -7,10 +7,10 @@ class Confirmation extends React.Component {
             <div className="container-fluid background_confirmation">
                 <div className="row">
                 <div className="col-md-4"></div>
-                <div className="card col-md-4">
-                    <img className="card-img-top" src="..." alt="Card image cap" />
+                <div className="square col-md-4">
+                <h1>You're Going!</h1>
                     <div className="card-block">
-                        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        <p className="card-text">Small batch subway tile gastropub coloring book. VHS semiotics distillery, hammock tousled chillwave green juice tilde vape kickstarter copper mug gastropub mlkshk normcore. Ennui messenger bag fam etsy enamel pin vape. Taxidermy church-key VHS 90's umami. Tousled lumbersexual DIY green juice intelligentsia banjo. </p>
                     </div>
                     <ul className="list-group list-group-flush">
                         <li className="list-group-item">Cras justo odio</li>
@@ -19,7 +19,7 @@ class Confirmation extends React.Component {
                     </ul>
                     <div className="card-block">
                        <div className="form-group text-center">
-                        <button className="btn btn-primary"><Link to="/calendar">Back to Calendar</Link></button>
+                        <button className="btn btn-secondary"><Link to="/calendar">Back to Calendar</Link></button>
                     </div>
                     </div>
                 </div>

@@ -18,6 +18,7 @@ class CreateEvent extends React.Component {
       date_time: null,
       name: null,
       location_start: null,
+
     };
     this.formSubmit = this.formSubmit.bind(this);
     this.txtFieldChange = this.txtFieldChange.bind(this);
@@ -54,7 +55,11 @@ class CreateEvent extends React.Component {
     let temp = this.state
     temp.date_time = storedDate
     temp.just_date = concatDate
-    
+    const object = JSON.parse(localStorage.user)
+    console.log(object);
+    temp.username = object.username
+    temp.created_by = object._id
+
     e.preventDefault();
     axios
       .post('http://localhost:8080/events', temp)
@@ -101,9 +106,6 @@ class CreateEvent extends React.Component {
     else if (e.target.name === "distance") {
       this.state.distance = e.target.value;
     }
-    else if (e.target.name === "level") {
-      this.state.level = e.target.value;
-    }
     else if (e.target.name === "comment") {
       this.state.comment = e.target.value;
     }
@@ -116,7 +118,6 @@ class CreateEvent extends React.Component {
       minPace: this.state.minPace,
       maxPace: this.state.maxPace,
       distance: this.state.distance,
-      level: this.state.level,
       comment: this.state.comment,
       route: this.state.route
     });
@@ -229,7 +230,7 @@ class CreateEvent extends React.Component {
                   name="route" />
               </div>
               <div className="form-group">
-                <button className="btn btn-primary">Create Event</button>
+                <button className="btn btn-secondary">Create Event</button>
               </div>
             </form>
             <div className="col-md-4"></div>

@@ -16,6 +16,7 @@ const EventSchema = new Schema({
     bag: Boolean,
     comment: {type: String},
     route: {type: String},
+    username: {type:String},
     attendees: [{type: ObjectId, ref:"User"}],
     created_by: {type: ObjectId, ref:'User'}
 });

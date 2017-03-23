@@ -1,7 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const Event = require('../models/events');
+const mongoose = require('mongoose');
 const authorize = require('../authentication/middleware/authorize');
+
+mongoose.Promise = global.Promise;
+
 //get all events
 router.get('/', (req, res) => {
     // const now = new Date();
@@ -17,8 +21,6 @@ router.get('/', (req, res) => {
 
 // get all events by date specified
 router.get('/date', (req, res) => {
-    console.log(req.query)
-
     function zeroTime(d) {
         d.setHours(0);
         d.setMinutes(0);
@@ -43,7 +45,7 @@ router.get('/date', (req, res) => {
         })
 })
 
-router.get('/:event_id', authorize, (req, res) => {
+router.get('/:event_id', (req, res) => {
     Event.findById(req.params.event_id)
         .then(updated => {res.json(updated)
         console.log(updated)}
@@ -52,11 +54,14 @@ router.get('/:event_id', authorize, (req, res) => {
     
 });
 
-//CREATE a new event
-router.post('/', authorize, (req, res) => {
-    let object = req.body
+//get event by time period
 
-    if (object.date_time > Date.now()) {
+
+
+//CREATE a new event
+router.post('/', (req, res) => {
+    let object = req.body
+    console.log('This is req.body:'); 
         let newEvent = Event({
             name: object.name,
             date_time: object.date_time,
@@ -67,22 +72,23 @@ router.post('/', authorize, (req, res) => {
             bag: object.bag,
             men: object.men,
             women: object.women,
-            comment: object.comment
+            comment: object.comment,
+            username: object.username,
+            created_by: object.created_by
         })
+        console.log('This is the new Event:');
+        console.log(newEvent)
         newEvent.save()
-            .then(element => { res.json(newEvent) })
+            .then(element => {res.json(newEvent) })
             .catch(err => {
                 console.log(err)
                 res.status(400).json({ err })
             })
-    }
-});
+    });
 
 //add attendees to event
 
-router.post('/:event_id/attendees', authorize, (req, res) => {
-
-
+router.post('/:event_id/attendees', (req, res) => {
     Event.findById(req.params.event_id).then(event => {
         if (event.attendees.indexOf(req.body.id) == -1){
             event.attendees.push(req.body.id);
@@ -109,7 +115,7 @@ router.post('/:event_id/attendees', authorize, (req, res) => {
 
 //update an event
 
-router.put('/:event_id', authorize, (req, res) => {
+router.put('/:event_id', (req, res) => {
     const updateData = req.body;
     Event.findOneAndUpdate({ _id: req.params.event_id }, updatedData)
         .then(updated => res.json(updated))
@@ -118,7 +124,7 @@ router.put('/:event_id', authorize, (req, res) => {
 
 //delete an event
 
-router.delete('/:event_id', authorize, (req, res) => {
+router.delete('/:event_id', (req, res) => {
     Event.findOneAndRemove({ _id: req.params.event_id })
         .then(deleted => res.json(deleted))
         .catch(err => res.status(500).json(err));

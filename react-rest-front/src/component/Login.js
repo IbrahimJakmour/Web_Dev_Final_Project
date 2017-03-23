@@ -20,7 +20,8 @@ class Login extends React.Component {
         console.log(res);
             if(res.status === 200){
                 localStorage.authToken = res.data.token;
-                location.href ="http://localhost:3000/private";
+                localStorage.user = JSON.stringify(res.data.user);
+                location.href ="http://localhost:3000/calendar";
                 console.log(localStorage.authToken);
             }
         })
@@ -69,7 +70,7 @@ class Login extends React.Component {
               name="password" />
           </div>
           <div className="form-group text-center">
-            <button className="btn btn-primary"><Link to="/calendar">Login</Link></button>
+            <button className="btn btn-secondary"><Link to="/calendar">Login</Link></button>
             <br/>
             <a href=""><Link to="/register">Sign Up</Link></a>
           </div>

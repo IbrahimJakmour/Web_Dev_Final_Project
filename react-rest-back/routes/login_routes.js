@@ -19,7 +19,8 @@ router.post('/', (req, res) => {
                 if(result){
                     let token = jwt.sign({username:username}, 'userkey');
                     console.log(token)
-                    res.json({token:token});
+                    res.json({token:token,
+                        user:user[0]});
                 } else {
                     res.status(403).send({token:null});
                 } 
