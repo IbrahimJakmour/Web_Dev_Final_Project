@@ -27,7 +27,7 @@ class EventDetails extends React.Component {
         axios.post('http://localhost:8080/events/' + eventId + '/attendees', { id: userId }, { headers: { 'authorization': localStorage.authToken } })
             .then(response => {
                 console.log('this is the response');
-                 this.msg.show('you are signed in', {
+                this.msg.show('you are signed in', {
                     time: 10000,
                     type: 'success',
                     icon: <img src="" />
@@ -96,7 +96,7 @@ class EventDetails extends React.Component {
                          </label>
                             <div className="card-block">
                                 <button className="btn btn-secondary" onClick={this.handleConfirm}>{/*<Link to="/confirmation">Attend</Link>*/}Attend</button>
-                                 <button className="btn btn-secondary"><Link to="/calendar">Back</Link></button>
+                                <button className="btn btn-secondary"><Link to="/calendar">Back</Link></button>
                             </div>
 
                         </div>

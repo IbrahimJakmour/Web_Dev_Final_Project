@@ -198,9 +198,10 @@ class CreateEvent extends React.Component {
                     type="checkbox" />Bag Check
                 </label>
               </div>
+              {/*
               <div className="checkbox">
                 <label>
-                  <input
+                 <input
                     onChange={this.checkBox}
                     className="checkbox"
                     type="checkbox" />Men
@@ -214,6 +215,7 @@ class CreateEvent extends React.Component {
                     type="checkbox" />Women
                 </label>
               </div>
+              */}
               <div className="form-group">
                 <textarea
                   onChange={this.txtFieldChange}
@@ -230,7 +232,7 @@ class CreateEvent extends React.Component {
                   placeholder="Route Link"
                   name="route" />
               </div>
-              <div className="form-group">
+              <div className="form-group text-center">
                 <button className="btn btn-secondary">Create Event</button>
                 <button className="btn btn-secondary"><Link to="/calendar">Back</Link></button>
               </div>
