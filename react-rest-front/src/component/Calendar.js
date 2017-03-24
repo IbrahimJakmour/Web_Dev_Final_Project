@@ -19,7 +19,7 @@ class Calendar extends React.Component {
         this.handleSearchByDayTime = this.handleSearchByDayTime.bind(this);
         this.state = {
             events: [],
-            value: 1,
+            value: '',
             minDate: null,
             maxDate: null
         }
@@ -71,20 +71,24 @@ class Calendar extends React.Component {
     };
 
     handleSearchByDayTime(e) {
-        event.preventDefault();
+        e.preventDefault();
+
         const config = {
             params: {
-                value: this.state.value
+                day_period: this.state.value
             }
         }
+        console.log(config)
         axios.get('http://localhost:8080/events/time', config)
             .then(response => {
+                console.log('1 step further')
                 this.setState({
                     events: response.data
                 })
             })
             .catch(err => {
                 console.log(err)
+                console.log('here')
             })
     };
     txtFieldChange(e) {
@@ -115,55 +119,51 @@ class Calendar extends React.Component {
     render() {
         const responseArray = this.state.events
         const eventsArray = responseArray.map((event, i) => {
-            return <OneEvent key={i} name={event.name} distance={event.distance} date_time={event.date_time} comment={event.comment} minPace={event.minPace} maxPace={event.maxPace} location_start={event.location_start} day_period={event.day_period} just_date={event.just_date} bag={event.bag} event_id={event._id} />
+            return <OneEvent key={i} name={event.name} distance={event.distance} date_time={event.date_time} comment={event.comment} minPace={event.minPace} maxPace={event.maxPace} location_start={event.location_start} day_period={event.day_period} just_date={event.just_date} bag={event.bag} event_id={event._id} id={event._id}/>
         })
-        
-        return (
-            <div className="container">
-                <h1>Hello!</h1>
-                <div className="search_bar container-fluid">
-                    <div className="row">
-                        <div className="col-md-4">
-                            <DatePicker
-                                hintText="From Date"
-                                value={this.state.minDate}
-                                onChange={this.handleChangeDateMin}
-                                name="minDate"
-                            />
-                        </div>
-                        <div className="col-md-4">
-                            <DatePicker
-                                hintText="To Date"
-                                value={this.state.maxDate}
-                                onChange={this.handleChangeDateMax}
-                                name="maxDate"
-                            />
-                        </div>
-                        <div className="col-md-4">
-                            <button type="button" className="btn btn-secondary" onClick={this.handleSearchDate}>Search</button>
-                        </div>
-                    </div>
 
-                    <div className="row">
-                        <div className="searchTime col-md-4">
-                            <SelectField value={this.state.value} onChange={this.handleSearchTime}>
-                                <MenuItem value={1} label="5 am - 12 pm" primaryText="Morning" />
-                                <MenuItem value={2} label="12 pm - 5 pm" primaryText="Afternoon" />
-                                <MenuItem value={3} label="5 pm - 9 pm" primaryText="Evening" />
-                                <MenuItem value={4} label="9 pm - 5 am" primaryText="Night" />
-                            </SelectField>
-                        </div>
-                        <div className="col-md-4">
-                            <button type="button" className="btn btn-secondary" onClick={this.handleSearchByDayTime}>Search</button>
-                        </div>
-                        <div className="col-md-4"></div>
+        return (
+            <div className="container-fluid">
+                <h1>Run Calendar: Find A Run</h1>
+                <div className="searchbar">
+                <div className="row">
+                    <div className="col-md-4 text-center">
+                        <h2>Search by Date</h2>
+
+                        <DatePicker
+                            hintText="From Date"
+                            value={this.state.minDate}
+                            onChange={this.handleChangeDateMin}
+                            name="minDate"
+                        />
+
+                        <DatePicker
+                            hintText="To Date"
+                            value={this.state.maxDate}
+                            onChange={this.handleChangeDateMax}
+                            name="maxDate"
+                        />
+                        <button type="button" className="btn btn-secondary searchDate" onClick={this.handleSearchDate}>Search</button>
+                    </div>
+                    <div className="col-md-4 text-center">
+                        <h2>Search by Time</h2>
+                        <SelectField value={this.state.value} onChange={this.handleSearchTime} name="day_period" hintText="Day Period">
+                            <MenuItem value={'morning'} label="5 am - 12 pm" primaryText="Morning" />
+                            <MenuItem value={'afternoon'} label="12 pm - 5 pm" primaryText="Afternoon" />
+                            <MenuItem value={'evening'} label="5 pm - 9 pm" primaryText="Evening" />
+                            <MenuItem value={'night'} label="9 pm - 5 am" primaryText="Night" />
+                        </SelectField>
+                        <button type="button" className="btn btn-secondary searchTime" onClick={this.handleSearchByDayTime}>Search</button>
+
+                    </div>
+                    <div className="col-md-4 text-center">
+                        <h2>Create Your Event</h2>
+                        <button type="button" className="btn btn-secondary createEvent"><Link to="/createEvent">Create Event</Link></button>
                     </div>
                 </div>
-                <button type="button" className="btn btn-secondary"><Link to="/createEvent">Create Event</Link></button>
-                <div className="row">
-
-                    {eventsArray}
-
+                    <div className="container-fluid">
+                        {eventsArray}
+                    </div>
                 </div>
             </div>
         )

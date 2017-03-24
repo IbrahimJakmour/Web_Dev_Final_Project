@@ -84,7 +84,7 @@ class Register extends React.Component {
       <div id="register" className="background_login container-fluid">
         <div className="row">
           <div className="col-md-4"></div>
-          <div className="col-md-4 square">
+          <div className="col-md-4 square align-center">
         
             <h2>Create Your Account</h2>
             <h3>Join the Community</h3>

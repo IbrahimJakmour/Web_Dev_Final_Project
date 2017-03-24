@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
 
 // get all events by date specified
 router.get('/date', (req, res) => {
+    console.log(req.query)
     function zeroTime(d) {
         d.setHours(0);
         d.setMinutes(0);
@@ -29,6 +30,9 @@ router.get('/date', (req, res) => {
     }
     minDate = zeroTime(new Date(req.query.minDate));
     maxDate = zeroTime(new Date(req.query.maxDate));
+    console.log(minDate);
+    console.log(maxDate);
+    
     Event.find({
         date_time: { $gte: minDate, $lte: maxDate, }
     })
@@ -42,6 +46,21 @@ router.get('/date', (req, res) => {
         })
 })
 
+// get event by time period
+router.get('/time', (req, res) => {
+    console.log('where is the request???') 
+    Event.find({day_period : req.query.day_period})
+        .then(event => {
+            res.json(event)
+            console.log('success')
+        })
+        .catch(err => {
+            res.status(400)
+                .json({ err })
+                console.log('oops')
+        })
+});
+
 //get element by id number
 router.get('/:event_id', (req, res) => {
     Event.findById(req.params.event_id)
@@ -53,20 +72,7 @@ router.get('/:event_id', (req, res) => {
 
 });
 
-//get event by time period
-router.get('/time', (req, res) => {
-    console.log(req)
-    Event.find({day_period : req.query.day_period})
-        .then(event => {
-            res.json(event)
-            console.log(event)
-        })
-        .catch(err => {
-            res.status(400)
-                .json({ err })
-                console.log('oops')
-        })
-});
+
 
 
 //CREATE a new event

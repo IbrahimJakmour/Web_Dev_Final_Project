@@ -10,6 +10,7 @@
     "material-ui": "^0.17.1",
     "moment": "^2.18.0",
     "react": "^15.4.2",
+    "react-alert": "^1.0.14",
     "react-dom": "^15.4.2",
     "react-native": "^0.42.3",
     "react-native-textinput-effects": "^0.3.0",

@@ -62,8 +62,9 @@ class CreateEvent extends React.Component {
 
     e.preventDefault();
     axios
-      .post('http://localhost:8080/events/calendar', temp)
+      .post('http://localhost:8080/events', temp)
       .then((res) => {
+        location.href('/calendar');
         console.log(res);
       })
 
@@ -231,6 +232,7 @@ class CreateEvent extends React.Component {
               </div>
               <div className="form-group">
                 <button className="btn btn-secondary">Create Event</button>
+                <button className="btn btn-secondary"><Link to="/calendar">Back</Link></button>
               </div>
             </form>
             <div className="col-md-4"></div>
