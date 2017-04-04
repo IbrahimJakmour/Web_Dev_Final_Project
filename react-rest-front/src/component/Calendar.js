@@ -153,6 +153,7 @@ class Calendar extends React.Component {
                             <MenuItem value={'evening'} label="5 pm - 9 pm" primaryText="Evening" />
                             <MenuItem value={'night'} label="9 pm - 5 am" primaryText="Night" />
                         </SelectField>
+                        <br/>
                         <button type="button" className="btn btn-secondary searchTime" onClick={this.handleSearchByDayTime}>Search</button>
 
                     </div>

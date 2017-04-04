@@ -100,7 +100,7 @@ h1{
   margin: 0 auto;
 }
 .benefits{
-  padding: 40px 40px;
+  padding: 165px 40px 0 40px;
 }
 .row{
   margin-left: 0px;
@@ -124,7 +124,7 @@ h1{
 .card{
   border: 1px solid lightgrey;
   background-color: #fff;
-    width: 235px;
+    width: 250px;
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
