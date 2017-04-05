@@ -40,7 +40,7 @@ class Register extends React.Component {
   formSubmit(e) {
     e.preventDefault();
     axios
-      .post('http://localhost:8080/users', this.state)
+      .post('/users', this.state)
       .then((res) => {
         localStorage.user = JSON.stringify(res.data);
         location.href= ('/login');

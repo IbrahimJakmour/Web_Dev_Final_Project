@@ -58,7 +58,7 @@ class Calendar extends React.Component {
             }
         }
         // other option: var url = 'http://localhost:8080/events/date' + '?minDate=' + minDate.toString() + '&' + 'maxDate=' + maxDate.toString()
-        axios.get('http://localhost:8080/events/date', config)
+        axios.get('/events/date', config)
             .then(response => {
                 console.log('this is the response for the search get date request')
                 this.setState({
@@ -79,7 +79,7 @@ class Calendar extends React.Component {
             }
         }
         console.log(config)
-        axios.get('http://localhost:8080/events/time', config)
+        axios.get('/events/time', config)
             .then(response => {
                 console.log('1 step further')
                 this.setState({
@@ -106,7 +106,7 @@ class Calendar extends React.Component {
 
     componentWillMount() {
         console.log("This will mount is firing.");
-        axios.get('http://localhost:8080/events')
+        axios.get('/events')
             .then(response => {
                 this.setState({
                     events: response.data

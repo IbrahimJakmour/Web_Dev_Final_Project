@@ -24,7 +24,7 @@ class EventDetails extends React.Component {
         const eventId = this.state.events._id
         const userId = JSON.parse(localStorage.user)._id
         console.log()
-        axios.post('http://localhost:8080/events/' + eventId + '/attendees', { id: userId }, { headers: { 'authorization': localStorage.authToken } })
+        axios.post('/events/' + eventId + '/attendees', { id: userId }, { headers: { 'authorization': localStorage.authToken } })
             .then(response => {
                 console.log('this is the response');
                 this.msg.show('you are signed in', {
@@ -47,7 +47,7 @@ class EventDetails extends React.Component {
 
     componentWillMount() {
         const event_id = this.props.params.event_id
-        axios.get('http://localhost:8080/events/' + event_id, { headers: { 'authorization': localStorage.authToken } })
+        axios.get('/events/' + event_id, { headers: { 'authorization': localStorage.authToken } })
             .then(response => {
                 console.log('here', response.data)
                 this.setState({

@@ -18,6 +18,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true}));
+app.use(express.static(__dirname + './../react-rest-front/build'));
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error'));
@@ -46,9 +47,10 @@ app.use('/events', eventRoutes);
 app.use('/users', userRoutes);
 app.use('/login', loginRoutes);
 
-// app.get('*', (req,res) =>{
-//     console.log('catch all route')
-// })
+ 
+app.get('*', function (req, res) {
+   res.sendFile(path.resolve((__dirname + './../react-rest-front/build/index.html')));
+});
 
 app.listen(PORT, () => {
 	console.log('Server Started on http://localhost:8080', PORT);

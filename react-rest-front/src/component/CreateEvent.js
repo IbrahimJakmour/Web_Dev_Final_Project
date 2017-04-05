@@ -62,7 +62,7 @@ class CreateEvent extends React.Component {
 
     e.preventDefault();
     axios
-      .post('http://localhost:8080/events', temp)
+      .post('/events', temp)
       .then((res) => {
         location.href('/calendar');
         console.log(res);

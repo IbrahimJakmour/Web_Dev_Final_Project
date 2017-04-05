@@ -15,13 +15,13 @@ class Login extends React.Component {
     let self = this;
     e.preventDefault();
     axios
-      .post('http://localhost:8080/login',this.state)
+      .post('/login',this.state)
       .then((res) => {
         console.log(res);
             if(res.status === 200){
                 localStorage.authToken = res.data.token;
                 localStorage.user = JSON.stringify(res.data.user);
-                location.href ="http://localhost:3000/calendar";
+                location.href ="/calendar";
                 console.log(localStorage.authToken);
             }
         })

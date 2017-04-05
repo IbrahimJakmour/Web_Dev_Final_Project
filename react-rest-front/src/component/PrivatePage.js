@@ -12,7 +12,7 @@ class PrivatePage extends React.Component{
     if(localStorage.authToken !== undefined && localStorage.authToken !== null){
         //Add token to request header
         axios
-        .get('http://localhost:8080/privatedata',{headers:{'authorization':localStorage.authToken}})
+        .get('/privatedata',{headers:{'authorization':localStorage.authToken}})
         .then((res) => {
             console.log(res);
             if(res.status === 200){
@@ -29,7 +29,7 @@ class PrivatePage extends React.Component{
         }
         )}
     else{
-        location.href = 'http://localhost:3000';
+        location.href = '/';
     }
   }
   render(){
