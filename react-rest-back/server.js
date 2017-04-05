@@ -3,7 +3,7 @@ const https = require('https');
 const app = express();
 const bodyParser = require('body-parser');
 const router = express.Router();
-const PORT = 8080
+const PORT = process.env.PORT || 8080;
 const mongoose = require('mongoose');
 const User = require('./models/users');
 const Event = require('./models/events');
@@ -51,7 +51,7 @@ app.use('/login', loginRoutes);
 // })
 
 app.listen(PORT, () => {
-	console.log('Server Started on http://localhost:8080');
+	console.log('Server Started on http://localhost:8080', PORT);
 	console.log('Press CTRL + C to stop server');
 });
 
