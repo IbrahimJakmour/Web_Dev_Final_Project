@@ -27,7 +27,7 @@ class Calendar extends React.Component {
 
     handleClick(e) {
         event.preventDefault();
-        axios.post('http://localhost:8080/events/create')
+        axios.post('/events/create')
             .then(response => {
                 console.log("This is the response for the post.");
             })

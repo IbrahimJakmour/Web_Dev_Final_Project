@@ -53,7 +53,7 @@ app.get('*', function (req, res) {
 });
 
 app.listen(PORT, () => {
-	console.log('Server Started on http://localhost:8080', PORT);
+	console.log("Listening on Port:%s",PORT);
 	console.log('Press CTRL + C to stop server');
 });
 
