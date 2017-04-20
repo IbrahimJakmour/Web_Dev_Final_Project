@@ -48,7 +48,7 @@ app.use('/users', userRoutes);
 app.use('/login', loginRoutes);
 
  
-app.get('*', function (req, res) {
+app.get('*', function(req, res) {
    res.sendFile(path.resolve((__dirname + './../react-rest-front/build/index.html')));
 });
 
