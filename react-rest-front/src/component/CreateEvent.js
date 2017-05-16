@@ -64,7 +64,7 @@ class CreateEvent extends React.Component {
     axios
       .post('/events', temp)
       .then((res) => {
-        location.href('/calendar');
+        this.props.router.push('/calendar');
         console.log(res);
       })
 

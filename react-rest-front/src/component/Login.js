@@ -21,7 +21,7 @@ class Login extends React.Component {
             if(res.status === 200){
                 localStorage.authToken = res.data.token;
                 localStorage.user = JSON.stringify(res.data.user);
-                location.href ="/calendar";
+                self.props.router.push("/calendar");
                 console.log(localStorage.authToken);
             }
         })
