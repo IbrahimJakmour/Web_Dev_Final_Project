@@ -49,7 +49,8 @@ app.use('/login', loginRoutes);
 
  
 app.get('*', function(req, res) {
-   res.sendFile(path.resolve((__dirname + './../react-rest-front/build/index.html')));
+   // res.sendFile(path.resolve((__dirname + './../react-rest-front/build/index.html')));
+   res.sendFile('index.html',{root: __dirname + './../build'});
 });
 
 app.listen(PORT, () => {
