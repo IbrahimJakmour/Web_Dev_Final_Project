@@ -40,7 +40,9 @@ router.post('/', (req, res) => {
                 console.log(element)
                 res.json(newUser)
             })
-            .catch(err => {res.status(400).json({err})
+            .catch(err => {
+                console.log(err)
+                res.status(400).json({err})
             })
         });
     })

@@ -16,6 +16,7 @@ router.post('/', (req, res) => {
         .then(user => {
             console.log(user);
             bcrypt.compare(password, user[0].password, function(err,result){
+                if (err) {console.log(err)}
                 if(result){
                     let token = jwt.sign({username:username}, 'userkey');
                     console.log(token)
